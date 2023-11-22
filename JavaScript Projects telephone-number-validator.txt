@@ -1,0 +1,27 @@
+function telephoneCheck(str) {
+  
+  let justNumsRegex = /\d/g;
+  let justNumsArr = str.match(justNumsRegex);
+
+  // filter out strings that are longer then 10 digits AND start with the number 1, to avoid numbers like "11 555-555-5555". Also filter out strings that are longer than 10 digits and don't start with the number 1, to avoid country codes other than the US
+  if(justNumsArr.length - 1 > 10 && justNumsArr[0] == '1' || justNumsArr.length > 10 && justNumsArr[0] != '1') {
+    return false;
+  }
+
+  // filter out strings less than 10 digits, as those can't be US numbers
+  if(str.length < 10) {
+    return false;
+  }
+
+  /* 
+  Check that the number starts with the number 1 (optional), ^(1)*
+  Check if there's a space or a dash (optional), [\s-]*
+  Check if there's 3 digits OR 3 digits surrounded by parantheses, (\d{3}|\(\d{3}\))
+  Check that the remaining groupings are 3 digits followed by 4 digits, (\d{3}).*(\d{4})
+  */
+  let phoneRegex = /^(1)*[\s-]*(\d{3}|\(\d{3}\))[\s-]*(\d{3}).*(\d{4})/
+
+  return phoneRegex.test(str); 
+}
+
+telephoneCheck("(275)76227382");

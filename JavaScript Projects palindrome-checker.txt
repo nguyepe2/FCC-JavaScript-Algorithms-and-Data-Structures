@@ -1,0 +1,19 @@
+function palindrome(str) {
+  // regex to exclude non-alphanumeric and underscore characters
+  let charRegex = /[^\W_]/g;
+  
+  // convert the string to an array of lower case characters
+  let charArr = str.toLowerCase().match(charRegex);
+
+  // loop through charArr, comparing first and last characters to each other. If any don't match, the string isn't a palindrome. Divide length by 2 to reduce the amount of iterations it takes, as when one half is checked, the other half has already been checked
+  for(let i = 0; i < charArr.length/2; i++) {
+    if(charArr[i] != charArr[charArr.length - (i+1)]) {
+      return false;
+    }
+  }
+
+
+  return true;
+}
+
+palindrome("0_0 (: /-\ :) 0-0");

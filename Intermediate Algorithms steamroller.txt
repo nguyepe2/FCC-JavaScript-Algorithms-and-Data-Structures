@@ -1,0 +1,32 @@
+function steamrollArray(arr) {
+  let flattenedArr = [];
+
+  /*
+    recursively flatten the array by traversing array and checking if value at index is an array:
+    if yes, call the function again, i.e. 
+      if flatten(arr[i]) is an array, call flatten(arr[i][i]), 
+      etc.
+    if not an array, then the index is "flattened", so push the value of the index to the flattenedArr array
+  */
+  function flatten(arr) {  
+    for(let i = 0; i < arr.length; i++) {
+      // base case, element in array is not an array
+      if(Array.isArray(arr[i]) == false) {
+         flattenedArr.push(arr[i]);
+      }
+      // element is an array
+      else {
+        flatten(arr[i]);
+      }
+    }
+
+  }
+
+  flatten(arr);
+  console.log(flattenedArr)
+  return flattenedArr;
+}
+
+
+
+steamrollArray([1, [2], [3, [[4]]]]);

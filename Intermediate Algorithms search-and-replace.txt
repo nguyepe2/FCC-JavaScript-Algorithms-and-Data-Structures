@@ -1,0 +1,46 @@
+function myReplace(str, before, after) {
+  let replacement = [...after];
+
+  // move str to an array
+  let wordArr = str.match(/\w+/g);
+
+  // find index of word to replace (before)
+  let index = wordArr.indexOf(before);
+
+  // check if word to replace is lowercase or uppercase
+  if(wordArr[index][0] == wordArr[index][0].toUpperCase()) {
+    // Capitalize the word we're replacing with
+    let firstLetterReplacement = replacement[0].toUpperCase();
+    
+    // give the replacment word the correct letter
+    replacement[0] = firstLetterReplacement;
+    
+    // put the word back together 
+    let newWord = replacement.join(''); 
+
+    // replace the previous word with the new word
+    wordArr[index] = newWord;
+
+    // put all the words back together
+    str = wordArr.join(' ');
+  }
+  else {
+    // Lowercase the word we're replacing with
+    let firstLetterReplacement = replacement[0].toLowerCase();
+    
+    // give the replacment word the correct letter
+    replacement[0] = firstLetterReplacement;
+    
+    // put the word back together 
+    let newWord = replacement.join(''); 
+
+    // replace the previous word with the new word
+    wordArr[index] = newWord;
+
+    // put all the words back together
+    str = wordArr.join(' ');
+  }
+  return str;
+}
+
+myReplace("A quick brown fox Jumped over the lazy dog", "Jumped", "leaped");

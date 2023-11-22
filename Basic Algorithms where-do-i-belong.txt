@@ -1,0 +1,30 @@
+function getIndexToIns(arr, num) {
+
+  arr.sort((a, b) => a - b); // sort the array by numeric value
+
+  /*
+  if array is empty, return 0
+  */
+
+  if(arr.length == 0) {
+    return 0;
+  }
+
+  /*
+  if the number is less than or equal to a value in the array, return the value's index
+  */
+
+  for(let i = 0; i < arr.length; i++) {
+    if(num <= arr[i]) {
+      return i;
+    }
+  }
+
+  /*
+  If none of the above scenarios are true, then the number must be larger than all the values in the array. Return the length of the array, since the number should be placed at the end
+  */
+
+  return arr.length;
+}
+
+getIndexToIns([10, 20, 30, 40, 50], 30);

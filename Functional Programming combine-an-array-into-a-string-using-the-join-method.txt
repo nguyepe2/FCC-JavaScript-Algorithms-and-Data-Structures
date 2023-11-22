@@ -1,0 +1,11 @@
+function sentensify(str) {
+  // Only change code below this line
+
+  /* First, split the string by non-alphanumeric characters into an array
+     Then join the elements of the array together using spaces
+  */
+  return str.split(/\W/g).join(" ");
+  // Only change code above this line
+}
+
+sentensify("May-the-force-be-with-you");

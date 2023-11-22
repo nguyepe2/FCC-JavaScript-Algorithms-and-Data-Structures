@@ -1,0 +1,47 @@
+function smallestCommons(arr) {
+  // sort the array
+  arr.sort((a, b) => a-b);
+  //console.log(arr);
+  let small = arr[0];
+  let large = arr[1];
+  let iter = large * 2;
+  let range = [];
+  let result = [];
+  let sum;
+
+  
+  // create array of values to check against
+  for(let i = small; i <= large; i++) {
+    range.push(i);
+  }
+  
+  /*
+  Keep looping and incrementing iter until a LCM is found 
+  */
+  while(sum != -1){
+    sum = -1; // initializes the sum variable for every loop
+
+    /* create an array, filling each index with the value of the iter % elem. If all elements are 0, then iter is divisble by all elems, i.e. iter is the LCM
+    */
+    result = range.map(elem => iter % elem);
+
+    //get sum of result array
+    for(let i = 0; i < result.length; i++) {
+      sum += result[i]; 
+    }
+    
+    // if the sum hasn't changed from what it was initialized as, all elems are 0
+    if(sum == -1) {
+      return iter;
+    }
+    
+    // increment iter by the largest argument originally given
+    iter += large;
+
+  }
+  
+  return arr;
+}
+
+
+smallestCommons([5,1]);

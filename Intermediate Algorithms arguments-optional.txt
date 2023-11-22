@@ -1,0 +1,33 @@
+function addTogether() {
+  // get number of arguments
+  const numArgs = arguments.length;
+  let args = [];
+
+  // check if argument is number. If not a number, return undefined
+  for(let i = 0; i < numArgs; i++) {
+    if(typeof arguments[i] !== "number") {
+      return undefined;
+    }
+    // store value of first argument to use in case only one argument is provided
+    args.push(arguments[i]);
+  }
+
+  // if two numbers, return sum
+  return numArgs == 2 ? arguments[0] + arguments[1] :  
+  
+  // Otherwise, it's one number, so create a function to get other argument. If num is a number sum both numbers together. If num is not a number, return undefined
+  (num) => typeof num == "number" ? args[0] + num : undefined;
+  
+  // function below is the same as anonymous function above, just another way to write the function!
+  /*
+  function getNumber(num) {
+    // check if argument is number. If not a number, return undefined
+    if(typeof num !== "number") {
+      return undefined;
+    }
+    return args[0] + num;
+  } 
+  */
+}
+
+addTogether(5)([3]);

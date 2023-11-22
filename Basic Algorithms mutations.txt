@@ -1,0 +1,29 @@
+function mutation(arr) {
+  let strRegex = /\S/g;
+  let first = arr[0].toLowerCase();
+  let second = arr[1].toLowerCase();
+  let arr1;
+  let arr2;
+
+  arr1 = first.match(strRegex)
+  arr2 = second.match(strRegex)
+  console.log(arr2);
+
+  for(let i = 0; i < arr2.length; i++) {
+    if(arr1.includes(arr2[i])) {
+      console.log(arr1[i]);
+    }
+    else {
+      return false;
+    }
+  }
+  
+  //console.log(first.match(strRegex));
+  //console.log(second.match(strRegex));
+
+  //console.log(first)
+  //console.log(second)
+  return true;
+}
+
+mutation(["Alien", "line"]);

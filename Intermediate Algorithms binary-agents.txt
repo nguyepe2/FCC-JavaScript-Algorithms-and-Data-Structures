@@ -1,0 +1,28 @@
+function binaryAgent(str) {
+  // split bianry str into "words"
+  let binaryWords = str.split(" ");
+
+  // convert binary to numbers
+  let numberArr = [];
+  
+  for(let i = 0; i < binaryWords.length; i++) {
+    let number = parseInt(binaryWords[i], 2);
+    numberArr.push(number);
+  }
+
+  // convert numbers to characters
+  let letterArr = [];
+
+  for(let i = 0; i < numberArr.length; i++) {
+    let letter = String.fromCharCode(numberArr[i]);
+    letterArr.push(letter);
+  }
+
+  // re-format the letters back into a string
+  let sentence;
+  sentence = letterArr.join('');
+
+  return sentence;
+}
+
+binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");

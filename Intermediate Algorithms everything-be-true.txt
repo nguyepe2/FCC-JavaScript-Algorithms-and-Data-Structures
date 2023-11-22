@@ -1,0 +1,31 @@
+function truthCheck(collection, pre) {
+  /*
+  Iterate through the objects in the collection, and check the truthyness of the property. Need to use !property for boolean comparison instead of:
+   property == false (type coercion messes things up, i.e. null and NaN ) 
+   or 
+   property === false (NaN, null, etc. should be false, but aren't literally "false")
+  */
+  
+  for(let object in collection) {    
+        if(!collection[object][pre]) {
+          return false;
+        }
+      }
+
+  /*
+  Different way of doing the same thing as above, this time iterating against the indexes of the collection instead of the objects of the collection
+
+  for(let i = 0; i < collection.length; i++) {
+      if(!collection[i][pre]) {
+        return false;
+      }
+  }
+  */ 
+ 
+  
+
+
+  return true;
+}
+
+truthCheck([{id: 1, data: {url: "https://freecodecamp.org", name: "freeCodeCamp"}}, {id: 2, data: {url: "https://coderadio.freecodecamp.org/", name: "CodeRadio"}}, {id: null, data: {}}], "id")

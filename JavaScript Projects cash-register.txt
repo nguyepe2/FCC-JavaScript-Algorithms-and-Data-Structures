@@ -1,0 +1,90 @@
+function checkCashRegister(price, cash, cid) {
+  let change = cash - price;
+  let initialCID = structuredClone(cid);
+  let totalCID = 0;
+  let customerChange = [];
+  let totalCustomerChange = 0;
+  let changeGiven = [];
+  let currencyArr = [
+  ["PENNY", .01],
+  ["NICKEL", .05],
+  ["DIME", .1],
+  ["QUARTER", .25],
+  ["ONE", 1],
+  ["FIVE", 5],
+  ["TEN", 10],
+  ["TWENTY", 20],
+  ["ONE HUNDRED", 100]
+];
+
+  /*
+  3 cases to cover:
+  1. INSUFFICIENT_FUNDS if cid < (cash - price) OR cid[0][i]+cid[0][i+1]... > (cash - price)
+  2. CLOSED if cid == (cash - price)
+  3. otherwise OPEN, "happy path"
+  */
+
+
+  // get total cash-in-drawer
+  for(let i = cid.length - 1; i > -1; i--) {
+    totalCID += cid[i][1];
+  }
+
+  
+  // coverage for case 2 (cid is exactly the value of change)
+  if(totalCID === change) {
+    return {status: "CLOSED", change: cid};
+  }
+
+  // go through process of giving customer change. Calculate the amount of bills and coins to give to the customer, starting with the highest value bills first
+  for(let i = cid.length - 1; i > -1; i--) {
+    if(currencyArr[i][1] <= change) { 
+
+      /* 
+      Inner loop handles the scenario where the value of change >= value of an individual bill/coin, while there are still bills/coins of that type. i.e. if change is $16, and we have $20 worth of $5 bills and $3 worth of $1 bills
+
+      Create array of values for bills and coins (currencyArr)
+      while change > currencyArr[i][1] AND cid[i][1] > 0
+        change -= currencyArr[i][1]
+        cid[i][1] -= currencyArr[i][1]
+      
+      outside of while loop, push cid[i]
+      */
+
+        while(change >= currencyArr[i][1] && cid[i][1] > 0) {
+
+        // subtract the value of cid[i][1] from change and remove a bill/coin from cid
+          change -= currencyArr[i][1];
+          cid[i][1] -= currencyArr[i][1];
+          change = Math.round(change * 100) / 100;
+        }
+     
+      // push cid[i] to a new array
+      customerChange.push(cid[i]);
+
+      // push the difference between the money currently in the cash register and what was originally in the register to keep track of how much money has been given
+      changeGiven.push(Math.round((initialCID[i][1] - cid[i][1])* 100) / 100); 
+
+    }
+  }
+  
+  // get total customerChange value
+  for(let i = customerChange.length - 1; i > -1; i--) {
+    totalCustomerChange += customerChange[i][1];
+  }
+
+  // Coverage for case 1: if there's no enough cash in drawer or we can't give the customer the exact change, return INSUFFICIENT_FUNDS
+  if(totalCID < change || totalCustomerChange < change) {
+    return {status: "INSUFFICIENT_FUNDS", change: []};
+  }
+  
+  // set return value to the correct format 
+  for(let i = 0; i < customerChange.length; i++) {
+  customerChange[i][1] = changeGiven[i];
+  }
+
+  // return statement for case 3, happy path
+  return {status: "OPEN", change: customerChange};
+}
+
+checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);

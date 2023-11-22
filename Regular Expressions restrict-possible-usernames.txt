@@ -1,0 +1,15 @@
+let username = "JackOfAllTrades";
+/*
+Solution is split into two parts:
+1. ^[A-Za-z][A-Za-z]+\d*$
+2. [A-Za-z]+\d\d+$
+
+Part 1: (covers usernames such as: "JACK", "AB1", prevents "BadUs3rnam3")
+Get one letter at the start, get at least one additional letter, check if any numbers exist at the end of the string
+
+Part 2: (covers usernames such as "Z97")
+Get at least one letter at the start, get one number, get at least one additional number at the end of the string
+*/
+
+let userCheck = /^[A-Za-z][A-Za-z]+\d*$|[A-Za-z]+\d\d+$/; // Change this line
+let result = userCheck.test(username);

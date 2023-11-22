@@ -1,0 +1,18 @@
+function fearNotLetter(str) {
+  /*
+  Get unicode for first char in str
+  iterate through loop starting at unicode for first char, checking for unicode match between chars in str and expected unicode, using i+first to get the character equivalent in unicode  (String.fromCharCode(i+97)) until mismatch. If no mismatch return undefined
+  */
+
+  let first = str.charCodeAt(0);
+
+  for(let i = 0; i < str.length; i++) {
+    if(String.fromCharCode(i+first) != str[i]) {
+      return String.fromCharCode(i+first);
+    }
+  }
+
+  return undefined;
+}
+
+fearNotLetter("abce");

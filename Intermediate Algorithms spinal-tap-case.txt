@@ -1,0 +1,18 @@
+function spinalCase(str) {
+  // regex to remove camelCase, i.e. "ThisIs" becomes "This Is". Looks for patterns of a lowercase folled by uppercase
+  let replaced = str.replace(/([a-z])([A-Z])/g, '$1 $2');
+
+  // removes all non-alphabet characters from the string, and places the words into an array
+  let letters = replaced.match(/[A-Za-z]+/g);
+
+  // combines the words together into a string with "-" between each word
+  let strung = letters.join("-");
+
+
+  let lowerStrung = strung.toLowerCase();
+
+
+  return lowerStrung;
+}
+
+spinalCase('The_Andy_Griffith_Show');

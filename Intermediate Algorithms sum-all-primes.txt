@@ -1,0 +1,31 @@
+function sumPrimes(num) {
+  let allNums = [];
+  let sum = 0;
+  
+  // create primes array to n, filling it with all true
+  for(let i = 0; i <= num; i++) {
+    allNums.push(true);
+  }
+  
+
+  // go through array starting at 2. Mark all indexes that are >= square of index and divisible by index as false
+  for(let i = 2; (i * i) <= num; i++) {
+    if(allNums[i] == true) {
+      for(let j = i * i; j <= num; j+=i) {
+        allNums[j] = false;
+      }
+    }
+  }
+
+  // filter for trues in array, and increment sum by the index value
+  for(let i = 2; i <= allNums.length; i++) {
+    if(allNums[i] == true) {
+
+      sum += i;
+    }
+  }
+
+  return sum;
+}
+
+sumPrimes(977);

@@ -1,0 +1,18 @@
+const squareList = arr => {
+  // Only change code below this line
+
+  /* Filter arr for two things:
+     1. Numbers greater than or equal to 0
+     2. Numbers that are the same as their floor, i.e. are integers, not decimals
+  */  
+  let positiveInt = arr.filter(nums => nums >= 0 && Math.floor(nums) == nums);
+  
+  // square each number in the array by mapping a squaring function to the positiveInt array
+  let squares = positiveInt.map(nums => nums * nums);
+  
+  return squares;
+  // Only change code above this line
+};
+
+const squaredIntegers = squareList([-3, 4.8, 5, 3, -3.2]);
+console.log(squaredIntegers);

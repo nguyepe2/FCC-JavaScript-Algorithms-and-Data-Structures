@@ -1,0 +1,45 @@
+function rot13(str) {
+  let alphabet = [];
+  let decodedStr = '';
+  
+  //create array of alphabet
+  for(let i = 65; i <=90; i++) {
+    alphabet.push(String.fromCharCode(i));
+  }
+  
+  //split the given str into an array of letters
+  let encodedArr = str.split('');
+
+  //for each letter get the index of where that letter is in the alphabet array. If character not in alphabet, push the character to the decoded arr
+  for(let i = 0; i < encodedArr.length; i++) {
+    let decodedIndex, currentIndex;
+    currentIndex = alphabet.indexOf(encodedArr[i]);
+
+    if(currentIndex === -1) {
+      decodedStr += encodedArr[i];
+    }
+
+  //check if the index - 13 is positive or negative
+  //if negative, push arr[arr.length + newIndex], since newIndex is negative, i.e. if newIndex is -1, we should get the last letter in the alphabet
+  //if positive, simply get arr[newIndex]
+
+    else if(currentIndex - 13 < 0) {
+      let negIndex;
+      negIndex = currentIndex - 13;
+      decodedIndex = alphabet.length + negIndex;
+      decodedStr += alphabet[decodedIndex];
+    }
+
+    else {
+      decodedStr += alphabet[currentIndex - 13];
+    }
+
+  }
+
+  console.log(decodedStr)
+
+  
+  return decodedStr;
+}
+
+rot13("SERR PBQR PNZC");

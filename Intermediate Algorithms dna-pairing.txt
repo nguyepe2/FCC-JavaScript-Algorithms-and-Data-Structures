@@ -1,0 +1,20 @@
+function pairElement(str) {
+  let pairs = ["A", "T", "C", "G"];
+  let pairedDNA = [];
+
+
+  // convert str to array of chars
+  let buildingBlockRegex = /\w/g;
+  let strand = str.match(buildingBlockRegex);
+
+  // iterate through strand array
+  for(let i = 0; i < strand.length; i++) {
+    /* check the value of the strand until a match is found, and then push both it and its pair
+    */
+    strand[i] == pairs[0] ? pairedDNA.push([strand[i], pairs[1]]) : strand[i] == pairs[1] ? pairedDNA.push([strand[i], pairs[0]]) : strand[i] == pairs[2] ? pairedDNA.push([strand[i], pairs[3]]) : strand[i] == pairs[3] ? pairedDNA.push([strand[i], pairs[2]]) : pairedDNA;
+  }
+
+  return pairedDNA;
+}
+
+pairElement("GCG");

@@ -1,0 +1,33 @@
+function translatePigLatin(str) {
+  /*
+  Group 1:
+  ^[^aeiou]+ for checking if group starts with non-vowels
+
+  Group 2:
+  [aeiou]* for grabbing second group of letters starting with a vowel, IF it exists! * symbol is mandatory in the case that the str doesn't have any vowels, i.e. "rhythm"
+  
+  .* used to grab the rest of the str, if necessary
+  */
+
+  let clusterRegex = /(^[^aeiou]+)([aeiou]*.*)/gi;
+
+  return clusterRegex.test(str) ? str.replace(clusterRegex, '$2$1') + "ay" : str + "way";
+
+  /*
+  Same as above return statment, just in if-else format instead
+
+  if(clusterRegex.test(str)) { // test if word begins with consonant
+    let piggy = str.replace(clusterRegex, '$2$1');
+
+    console.log(piggy + "ay");
+
+  } 
+  else {
+    console.log(str + "way");
+  } 
+  */
+
+  //return str;
+}
+
+translatePigLatin("eight");

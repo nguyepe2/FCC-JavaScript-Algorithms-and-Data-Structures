@@ -1,0 +1,18 @@
+function whatIsInAName(collection, source) {
+
+  let key = Object.keys(source);
+
+  let same = collection.filter(index => {
+    for(let i = 0; i < key.length; i++) {
+      //check that the current value of the property matches the value in source. Use [key[i]] to get the value of the property
+      if(index[key[i]] != source[key[i]]) {
+        return false;
+      } 
+    }
+    return true;
+  });
+
+  return same;
+}
+
+whatIsInAName([{ "apple": 1, "bat": 2 }, { "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "bat": 2 });

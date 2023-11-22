@@ -1,0 +1,27 @@
+function sumFibs(num) {
+  // initialize start of fibonacci sequence
+  const fibonacci = [0, 1, 1];
+  let val = 0;
+  let sum = 0;
+
+  // fill in fibonacci array until fibonacci[length - 1] > num
+  while(val < num) {
+    val = fibonacci[fibonacci.length - 1] + fibonacci[fibonacci.length - 2];
+
+    if(val <= num) {
+      fibonacci.push(val);
+    }
+  }
+
+  // filter fibonacci array for even numbers
+  let odds = fibonacci.filter(elem => elem % 2 == 1);
+
+  // sum elems in filtered fibonacci array 
+  for(let i = 0; i < odds.length; i++) {
+    sum += odds[i];
+  }
+
+  return sum;
+}
+
+sumFibs(75025);
